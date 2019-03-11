@@ -1,0 +1,38 @@
+//package com.chao.repository.impl;
+//
+//import com.chao.entity.Admin;
+//import com.chao.repository.AccountRepository;
+//import com.chao.util.JDBCTools;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.handlers.BeanHandler;
+//import org.springframework.stereotype.Repository;
+//
+//import java.sql.Connection;
+//import java.sql.SQLException;
+//
+//@Repository
+//public class AccountRepositoryImpl implements AccountRepository {
+//    private JDBCTools jdbc=new JDBCTools();
+//    QueryRunner queryRunner=new QueryRunner();
+//    @Override
+//    //验证登陆
+//    public boolean hasAdmin(Admin admin) {
+//        Connection connection=jdbc.getConnection();
+//        String sql="select * from admin where username=? and password=?";
+//        Admin result=null;
+//        boolean has=false;
+//        try {
+//            result=queryRunner.query(connection,sql,new BeanHandler<>(Admin.class),admin.getUsername(),admin.getPassword());
+//            if (result!=null){
+//                has=true;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return has;
+//    }
+//
+//
+//}

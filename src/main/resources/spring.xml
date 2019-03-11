@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!--c3p0:数据源-->
+    <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="root"></property>
+        <property name="password" value="2437262431"></property>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/personmanage?serverTimezone=UTC"></property>
+        <property name="initialPoolSize" value="5"></property>
+        <property name="maxPoolSize" value="10"></property>
+    </bean>
+
+    <!--sqlsessionfactory：类似于Java工程总拿到sqlsession-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"></property>
+        <property name="mapperLocations" value="classpath:com/chao/repository/*.xml"></property>
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+    </bean>
+
+    <!--注册mapper接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.chao.repository"></property>
+    </bean>
+</beans>

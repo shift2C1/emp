@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chao.repository.SalaryRepository">
+    <select id="getAllSalary" resultType="Salary">
+      select s.id,s.empnum,e.name  ename,e.age,s.basemoney,s.age,s.check_,s.absent,s.safty,s.check_,s.yearmonth  yearmonth
+        from salary as s,employee as e
+        where s.empnum=e.id
+    </select>
+    <select id="getByMonth" resultType="Salary">
+        select s.id,s.empnum,e.name,e.age,s.basemoney,s.age,s.check_,s.absent,s.safty,s.check_,s.yearmonth
+        from salary as s,employee as e
+        where s.empnum=e.id
+        and date_format(yearmonth,'%Y-%m') between  #{arg0} and #{arg1};
+    </select>
+    <select id="getByID" parameterType="int" resultType="Salary">
+        select s.id,s.empnum,e.name ename,e.age,s.basemoney,s.age,s.check_,s.absent,s.safty,s.check_,s.yearmonth
+        from salary as s,employee as e
+        where s.empnum=e.id and s.empnum=#{id}
+    </select>
+</mapper>

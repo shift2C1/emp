@@ -1,0 +1,122 @@
+//package com.chao.repository.impl;
+//
+//import com.chao.entity.Admin;
+//import com.chao.entity.AnounceMent;
+//import com.chao.repository.AdminManageRepository;
+//import com.chao.util.JDBCTools;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.handlers.BeanHandler;
+//import org.apache.commons.dbutils.handlers.BeanListHandler;
+//import org.springframework.stereotype.Repository;
+//
+//import javax.sql.DataSource;
+//import java.sql.Connection;
+//import java.sql.SQLException;
+//import java.util.List;
+//
+//@Repository
+//public class AdminManageRepositoryImpl implements AdminManageRepository {
+//
+//    private JDBCTools jdbc=new JDBCTools();
+//    private QueryRunner queryRunner=new QueryRunner();
+//    @Override
+//    public Admin getAdminInfo(String username) {
+//        Connection connection=jdbc.getConnection();
+//        String sql="select * from admin where username=?";
+//        Admin admin=null;
+//        try {
+//            admin =queryRunner.query(connection,sql,new BeanHandler<>(Admin.class),username);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return admin;
+//    }
+
+//    @Override
+//    public void updatePassword(Admin admin) {
+//        Connection connection=jdbc.getConnection();
+//        String sql="update admin set password=? where username=?";
+//        try {
+//            queryRunner.update(connection,sql,admin.getPassword(),admin.getUsername());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+
+//    @Override
+//    public void addAdmin(Admin admin) {
+//        Connection connection=jdbc.getConnection();
+//        String sql="insert into admin(username,password,level) values (?,?,?)";
+//        try {
+//             queryRunner.update(connection,sql,admin.getUsername(),admin.getPassword(),admin.getLevel());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+
+//    @Override
+//    public void deleteAdmin(Admin admin) {
+//        Connection connection=jdbc.getConnection();
+//        String sql="delete from admin where id=?";
+//        try {
+//            queryRunner.update(connection,sql,admin.getId());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+
+//    @Override
+//    public List<Admin> getAllAdmins(int index, int limit) {
+//        Connection connection=jdbc.getConnection();
+//        List<Admin> adminList=null;
+//        String sql="select * from admin where id limit ?,?";
+//        try {
+//            adminList=queryRunner.query(connection,sql,new BeanListHandler<>(Admin.class),index,limit);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return adminList;
+//    }
+
+//    @Override
+//    public Admin checkOldPass(Admin admin) {
+//        Connection connection=null;
+//        String sql="select* from admin where id=? and username=? and password=? and level=?";
+//        connection=jdbc.getConnection();
+//        Admin result=null;
+//        try {
+//            result=queryRunner.query(connection,sql,new BeanHandler<>(Admin.class),admin.getId(),admin.getUsername(),admin.getPassword(),admin.getLevel());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return result;
+//    }
+
+//    @Override
+//    public void storeAnoucement(AnounceMent anounceMent) {
+//        Connection connection=null;
+//        String sql="insert into anouncement(aid, did, content, date)\n" +
+//                "VALUES ((select id from admin where username=?),?,?,?)";
+//        connection=jdbc.getConnection();
+//
+//        try {
+//            queryRunner.update(connection,sql,anounceMent.getAname(),anounceMent.getDid(),anounceMent.getContent(),anounceMent.getDate());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+//}

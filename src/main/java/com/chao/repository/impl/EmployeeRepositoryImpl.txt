@@ -1,0 +1,102 @@
+//package com.chao.repository.impl;
+//
+//import com.chao.entity.EmpByDep;
+//import com.chao.entity.Employee;
+//import com.chao.entity.EmployeeOnTable;
+//import com.chao.entity.EmployeeVo;
+//import com.chao.repository.EmployeeRepository;
+//import com.chao.util.JDBCTools;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.handlers.BeanHandler;
+//import org.apache.commons.dbutils.handlers.BeanListHandler;
+//import org.springframework.stereotype.Repository;
+//
+//import java.sql.Connection;
+//import java.sql.SQLException;
+//import java.util.List;
+//
+//@Repository
+//public class EmployeeRepositoryImpl implements EmployeeRepository {
+//    private JDBCTools jdbc=new JDBCTools();
+//    private QueryRunner queryRunner=new QueryRunner();
+//    @Override
+//    public List<EmployeeOnTable> getAll(int index, int limit) {
+//        Connection connection=null;
+//        List<EmployeeOnTable> employeeList=null;
+//        String sql="select e.id,e.name,e.sex,e.age,d.name dname from employee e,department d where e.depid=d.id and e.id limit ?,?";
+//        try {
+//            connection=jdbc.getConnection();
+//            employeeList=queryRunner.query(connection,sql,new BeanListHandler<>(EmployeeOnTable.class),index,limit);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return employeeList;
+//    }
+
+//    @Override
+//    public void add(Employee employee) {
+//        Connection connection=null;
+////        List<Employee> employeeList=null;
+//        String sql="insert into employee (name,depid) values (?,?)";
+//        try {
+//            connection=jdbc.getConnection();
+//            queryRunner.update(connection,sql,employee.getName(),employee.getDepid());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+
+//    @Override
+//    public Employee getEmpByID(int id) {
+//        Connection connection=null;
+////        List<Employee> employeeList=null;
+//        Employee employee=null;
+//        String sql="select * from employee where id=?";
+//        try {
+//            connection=jdbc.getConnection();
+//            employee=queryRunner.query(connection,sql,new BeanHandler<>(Employee.class),id);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return employee;
+//    }
+
+//    @Override
+//    public void deleteByID(long id) {
+//        Connection connection=null;
+//        String sql="delete from employee where id=?";
+//        try {
+//            connection=jdbc.getConnection();
+//            queryRunner.update(connection,sql,id);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+
+//    @Override
+//    public List<EmpByDep> getEmpBydepID(int depid) {
+//        String sql="select e.id,e.name ename,e.sex,e.age,d.name dname from employee e,department d where e.depid=d.id and d.id =?";
+//        List<EmpByDep> employeeList=null;
+//
+//        Connection connection=null;
+//
+//        try {
+//            connection=jdbc.getConnection();
+//            employeeList=queryRunner.query(connection,sql,new BeanListHandler<>(EmpByDep.class),depid);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return employeeList;
+//    }
+//
+//}

@@ -1,0 +1,62 @@
+//package com.chao.repository.impl;
+//
+//import com.chao.entity.Department;
+//import com.chao.repository.DepRepository;
+//import com.chao.util.JDBCTools;
+//import org.apache.commons.dbutils.QueryRunner;
+//import org.apache.commons.dbutils.handlers.BeanListHandler;
+//import org.springframework.stereotype.Repository;
+//
+//import java.sql.Connection;
+//import java.sql.SQLException;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//@Repository
+//public class DepRepositoryImpl implements DepRepository {
+//    private JDBCTools jdbc=new JDBCTools();
+//    private QueryRunner queryRunner=new QueryRunner();
+//    @Override
+//    public void addDep(Department department) {
+//        Connection connection=null;
+//        String sql="insert into department(name,createtime,note) values (?,?,?)";
+//        try {
+//            connection=jdbc.getConnection();
+//            queryRunner.update(connection,sql,department.getName(),department.getCreatetime(),department.getNote());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+//    public List<Department> getDeps(){
+//        List<Department> departmentList=null;
+//        Connection connection=null;
+//        String sql="select * from department";
+//        try {
+//            connection=jdbc.getConnection();
+//            departmentList=queryRunner.query(connection,sql,new BeanListHandler<>(Department.class));
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//        return departmentList;
+//    }
+
+//    @Override
+//    public void delete(int id) {
+////        System.out.println("假设已经删除了");
+//        List<Department> departmentList=null;
+//        Connection connection=null;
+//        String sql="delete from department where id=?";
+//        try {
+//            connection=jdbc.getConnection();
+//           queryRunner.update(connection,sql,id);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            jdbc.release(connection,null,null);
+//        }
+//    }
+//}

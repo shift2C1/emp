@@ -1,0 +1,79 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <!--开启spring-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!--字符编码,解决中文乱码-->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--配置dispatcherservlet-->
+  <servlet>
+    <servlet-name>dispatcherservlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--关联到资源文件empmanage.xml，设置初始化参数-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:empmanage.xml</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcherservlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!-- 加载静态资源 -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.png</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.PNG</url-pattern>
+  </servlet-mapping>
+  <!--layui font-->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.eot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.svg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.ttf</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.woff</url-pattern>
+  </servlet-mapping>
+</web-app>

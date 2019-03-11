@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chao.repository.EmployeeRepository">
+    <select id="getAll" resultType="EmployeeOnTable">
+        select e.id,e.name,e.sex,e.age,d.name dname
+        from employee e,department d
+        where e.depid=d.id and e.id limit #{arg0},#{arg1}
+    </select>
+
+    <insert id="add" parameterType="Employee">
+        insert into employee (name,depid) values (#{name},#{depid})
+    </insert>
+
+    <select id="getEmpByID" parameterType="int" resultType="Employee">
+        select * from employee where id=#{id}
+    </select>
+
+    <delete id="deleteByID" parameterType="int">
+        delete from employee where id=#{id}
+    </delete>
+
+    <select id="getEmpBydepID" parameterType="int" resultType="EmpByDep">
+        select e.id,e.name ename,e.sex,e.age,d.name dname
+        from employee e,department d
+        where e.depid=d.id and d.id =#{id}
+    </select>
+
+    <select id="getMsg" resultType="AnounceMent" parameterType="java.lang.String">
+        select ad.username aname,an.date,an.content
+        from anouncement an,admin ad
+        where an.aid=ad.id and an.did=(select depid from employee where username=#{username})
+    </select>
+</mapper>
